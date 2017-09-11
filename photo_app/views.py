@@ -77,8 +77,7 @@ def photo_add(request):
     if request.method == "POST":
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
+            post = form.save()
             return redirect('photo_detail', pk=post.pk)
     else:
         form = PhotoForm()
