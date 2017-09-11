@@ -54,7 +54,7 @@ def photo_detail(request, pk):
         
     image_name, extension = os.path.splitext(file_name)
     new_image_name = image_name + '-Poly' + extension
-    img.save(new_image_name, 'JPEG')
+    img.save(new_image_name, 'PNG')
 
     new_photo = Photo() 
     new_photo.photo = new_image_name
