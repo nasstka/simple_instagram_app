@@ -6,7 +6,7 @@
   <div class="container">
         <h2 class="text-center" style="padding-bottom: 50px">Photo Details</h2>
         <div class="card">
-            <img class="card-img-top rounded mx-auto d-block" src="{{ new_image.photo.url }}">
+            <img class="card-img-top rounded mx-auto d-block" src="{{ new_photo.photo.url }}">
             <div class="card-block">
               <h4 class="card-title"> {{ photo.title }}</h4>
               <p class="card-text">{{ photo.description }}</p>
@@ -83,7 +83,7 @@
       {% endfor %}
       </table>
       {% else %}
-        <h4 class="text-center" style="padding-top: 60px">No faces were deceted in the image</h4>
+        <h4 class="text-center" style="padding-top: 60px">No faces were deceted in the image.</h4>
       {% endif %}
     </div>
   </div>
