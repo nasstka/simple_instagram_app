@@ -27,13 +27,13 @@ def photo_detail(request, pk):
 
     image = vision.types.Image(content=content)
 
- # Label detection
-    response = client.label_detection(image=image)
-    labels = response.label_annotations
+    # Label detection
+    label_response = client.label_detection(image=image)
+    labels = label_response.label_annotations
 
- # Face detection
-    response_f = client.face_detection(image=image)
-    faces = response_f.face_annotations
+    # Face detection
+    face_response = client.face_detection(image=image)
+    faces = face_response.face_annotations
 
     img = Image.open(file_name)
     draw = ImageDraw.Draw(img)
@@ -53,10 +53,11 @@ def photo_detail(request, pk):
         face_list.append(face_detail)
         
     image_name, extension = os.path.splitext(file_name)
-    img.save(image_name + '-Poly' + extension, 'JPEG')
+    new_image_name = image_name + '-Poly' + extension
+    img.save(new_image_name, 'JPEG')
 
     new_photo = Photo() 
-    new_photo.photo = image_name + '-Poly' + extension
+    new_photo.photo = new_image_name
     
     contents = {
         'photo': photo,
