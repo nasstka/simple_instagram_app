@@ -71,7 +71,7 @@ def photo_detail(request, pk):
 def photo_delete(request, pk):
     delete_photo = Photo.objects.get(id=pk)
     delete_photo.delete()
-    return render(request, 'photo_delete.html',{'delete_photo': delete_photo})
+    return render(request, 'photo_delete.html', {'delete_photo': delete_photo})
 
 def photo_add(request):
     if request.method == "POST":
