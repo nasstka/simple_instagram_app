@@ -3,9 +3,9 @@
 {% block content %}
 
 <div class="album text-muted">
-    <div class="container" style="padding-bottom: 10.5rem">
+    <div class="container">
         <div class="page-header">
-            <h2 class="text-center" style="padding-bottom:3rem; padding-top: 3rem">Add a new photo</h2>
+            <h2 class="text-center">Add a new photo</h2>
         </div>
             <form  method="post" enctype="multipart/form-data">{% csrf_token %}
                 <div class="form-group row">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group row">
                     <label for="usr">Photo:</label>
-                    <input type="file" accept ="image/*" id="photo" name="photo" class="form-control" required>
+                    <input type="file" accept ="image/*" id="image" name="image" class="form-control" required>
                 </div>
                 <div class="form-group row">
                     <button type="submit" class="btn btn-success">Save it</button>

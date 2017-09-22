@@ -4,7 +4,7 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-      <h1 class="jumbotron-heading" style="padding-bottom: 2.5rem">Photo Dashboard</h1>
+      <h1 class="jumbotron-heading">Photo Dashboard</h1>
       <p class="lead text-muted"></p>
       <p>
         <a href="{% url 'photo_add' %}" class="btn btn-primary">Add Photo</a>
@@ -13,12 +13,12 @@
 </section>
 
 <div class="album text-muted">
-  <div class="container" style="padding-bottom: 19rem" >
+  <div class="container">
     <div class="row">
       {% for photo in photos %}
       <div class="col">
            <a href="{% url 'photo_detail' pk=photo.id %}"> 
-             <img class="img-thumbnail round" style="width: 22rem" src="{{ photo.photo.url }}">
+             <img class="img-thumbnail round" src="{{ photo.image.url }}">
            </a>
       </div>
         {% if forloop.counter|divisibleby:3 %}

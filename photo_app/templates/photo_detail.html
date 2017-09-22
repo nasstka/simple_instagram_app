@@ -4,9 +4,9 @@
 
 <div class="album text-muted">
   <div class="container">
-        <h2 class="text-center" style="padding-bottom: 50px">Photo Details</h2>
+        <h2 class="text-center">Photo Details</h2>
         <div class="card">
-            <img class="card-img-top rounded mx-auto d-block" src="{{ new_photo.photo.url }}">
+            <img class="card-img-top rounded mx-auto d-block" src="{{ photo.modified_image.url }}">
             <div class="card-block">
               <h4 class="card-title"> {{ photo.title }}</h4>
               <p class="card-text">{{ photo.description }}</p>
@@ -40,10 +40,10 @@
           </tr>
         </thead>
         <tbody>
-        {% for label in labels %}
+        {% for label in lables_details %}
           <tr>
             <th>{{ forloop.counter }}</th>
-            <td>{{ label.description }}</td>
+            <td>{{ label.labels }}</td>
             <td>{% widthratio label.score 1 100 %}% </td>
           </tr>
         {% endfor %}
@@ -54,9 +54,9 @@
 
   <div class="tab-pane" id="faces" role="tabpanel">
     <div class="container"> 
-      {% if faces %}           
-      <table id="display" class="table table-striped">
-      {% for face in faces %}          
+      {% if faces_details %} 
+      {% for face in faces_details %}
+      <table class="table table-striped">       
         <thead class="thead-inverse">
           <tr>
             <th colspan="2">Face #{{ forloop.counter }}</th>
@@ -80,16 +80,16 @@
             <td> {{ face.sorrow }} </td>
           </tr>
         </tbody>
-      {% endfor %}
       </table>
+      {% endfor %}
       {% else %}
-        <h4 class="text-center" style="padding-top: 60px">No faces were deceted in the image.</h4>
+        <h4 class="text-center">No faces were deceted in the image.</h4>
       {% endif %}
     </div>
   </div>
 </div>
 
-<div style="padding-top: 60px" class="text-center">
+<div class="text-center">
   <a href="{% url 'photo_delete' pk=photo.id %}" class="btn btn-danger">Delete photo</a>
 </div>
 
