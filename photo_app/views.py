@@ -3,7 +3,7 @@ from django.forms.models import model_to_dict
 
 from .forms import PhotoForm
 from .models import Photo, VisionFaceDetails, VisionLabelsDetails
-from .services import photo_vision_service
+from .utils import get_all_objects, save_photo_vision_data
 
 
 def dashboard(request):
@@ -14,22 +14,14 @@ def dashboard(request):
 def photo_detail(request, pk):  
     photo = Photo.objects.get(id=pk)
 
-    faces_details = VisionFaceDetails.objects.filter(photo_id=pk)
-    list_of_faces_details = []
-    for detail in faces_details:
-        detail = model_to_dict(detail)
-        list_of_faces_details.append(detail)
+    faces_details = get_all_objects(VisionFaceDetails, pk)
 
-    labels_details = VisionLabelsDetails.objects.filter(photo_id=pk)
-    list_of_labels_details = []
-    for label in labels_details:
-        label = model_to_dict(label)
-        list_of_labels_details.append(label)
+    labels_details = get_all_objects(VisionLabelsDetails, pk)
 
     container = {
         'photo': photo, 
-        'faces_details': list_of_faces_details,
-        'lables_details': list_of_labels_details,
+        'faces_details': faces_details,
+        'lables_details': labels_details,
     }
 
     return render(request, 'photo_detail.html', container)
@@ -46,24 +38,7 @@ def photo_add(request):
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save()
-            photo_vision_data = photo_vision_service(post.pk)
-
-            list_of_faces = photo_vision_data.get('faces')
-            for face in list_of_faces:
-                details_of_face = VisionFaceDetails.objects.create(
-                    photo=post, 
-                    **face
-                )
-            
-            list_of_labels = photo_vision_data.get('labels')
-            labels_description = [*list_of_labels]
-            for description in labels_description:
-                labels_in_photo = VisionLabelsDetails(
-                    photo=post, 
-                    labels=description,
-                    score=list_of_labels[description]
-                )
-                labels_in_photo.save()
+            save_photo_vision_data(post.pk, post)
 
             return redirect('photo_detail', pk=post.pk)
     else:
