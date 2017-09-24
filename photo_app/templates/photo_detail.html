@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<div class="album text-muted">
+<div class="album text-muted details">
   <div class="container">
-        <h2 class="text-center">Photo Details</h2>
+        <h2 class="text-center header">Photo Details</h2>
         <div class="card">
             <img class="card-img-top rounded mx-auto d-block" src="{{ photo.modified_image.url }}">
             <div class="card-block">
@@ -83,13 +83,13 @@
       </table>
       {% endfor %}
       {% else %}
-        <h4 class="text-center">No faces were deceted in the image.</h4>
+        <h4 class="text-center no_face">No faces in the image.</h4>
       {% endif %}
     </div>
   </div>
 </div>
 
-<div class="text-center">
+<div class="text-center delete_btn">
   <a href="{% url 'photo_delete' pk=photo.id %}" class="btn btn-danger">Delete photo</a>
 </div>
 
