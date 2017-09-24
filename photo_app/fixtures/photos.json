@@ -1,0 +1,52 @@
+[
+    {
+        "model": "photo_app.photo",
+        "pk": 1,
+        "fields": {
+            "title": "test1",
+            "description": "test1",
+            "image": "test_image.jpg",
+            "modified_image": "test_image-modified.jpg"
+        }
+    },
+    {
+        "model": "photo_app.visionfacedetails",
+        "pk": 1,
+        "fields": {
+            "anger": "VERY UNLIKELY",
+            "joy": "VERY LIKELY",
+            "surprise": "VERY UNLIKELY",
+            "sorrow": "VERY UNLIKELY",
+            "photo": 1
+        }
+    },
+    {
+        "model": "photo_app.visionfacedetails",
+        "pk": 2,
+        "fields": {
+            "anger": "VERY UNLIKELY",
+            "joy": "VERY LIKELY",
+            "surprise": "VERY UNLIKELY",
+            "sorrow": "VERY UNLIKELY",
+            "photo": 1
+        }
+    },
+    {
+        "model": "photo_app.visionlabelsdetails",
+        "pk": 1,
+        "fields": {
+            "labels": "social group",
+            "score": 0.9060233235359192,
+            "photo": 1
+        }
+    },
+    {
+        "model": "photo_app.visionlabelsdetails",
+        "pk": 2,
+        "fields": {
+            "labels": "smile",
+            "score": 0.8409859538078308,
+            "photo": 1
+        }
+    }
+]
