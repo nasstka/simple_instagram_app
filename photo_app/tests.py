@@ -13,17 +13,17 @@ class PhotoFormTest(TestCase):
 
     def prepare_form(self):
         data = {
-            'title': 'test2', 
+            'title': 'test2',
             'description': 'test2',
         }
-        
+
         test_file_path = os.path.join(
             settings.BASE_DIR, 'test_data', 'upload_test_image.jpg'
         )
 
         file_data = {
             'image': SimpleUploadedFile(
-                'test_image.jpg', 
+                'test_image.jpg',
                 content=open(test_file_path, 'rb').read(),
                 content_type='image/jpeg'
             ),
@@ -79,5 +79,4 @@ class PhotoFormTest(TestCase):
         }
 
         form = PhotoForm(invalid_data, invalid_file)
-        
         self.assertFalse(form.is_valid())

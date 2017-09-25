@@ -6,8 +6,8 @@ class Photo(models.Model):
     description = models.CharField(max_length=250)
     image = models.ImageField(upload_to='photo/')
     modified_image = models.ImageField(
-        upload_to='photo/', 
-        null=True, 
+        upload_to='photo/',
+        null=True,
         blank=True
     )
 
@@ -19,7 +19,7 @@ class VisionFaceDetails(models.Model):
     sorrow = models.CharField(max_length=50)
     photo = models.ForeignKey(
         Photo,
-        on_delete=models.CASCADE, 
+        on_delete=models.CASCADE,
         related_name="face_detail"
     )
 
@@ -28,7 +28,7 @@ class VisionLabelsDetails(models.Model):
     labels = models.CharField(max_length=100)
     score = models.FloatField()
     photo = models.ForeignKey(
-        Photo, 
-        on_delete=models.CASCADE, 
+        Photo,
+        on_delete=models.CASCADE,
         related_name="label_detail"
     )

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.forms.models import model_to_dict
 
 from .forms import PhotoForm
 from .models import Photo, VisionFaceDetails, VisionLabelsDetails
@@ -11,7 +10,7 @@ def dashboard(request):
     return render(request, 'dashboard.html', {'photos': photos})
 
 
-def photo_detail(request, pk):  
+def photo_detail(request, pk):
     photo = Photo.objects.get(id=pk)
 
     faces_details = get_all_objects(VisionFaceDetails, pk)
@@ -19,7 +18,7 @@ def photo_detail(request, pk):
     labels_details = get_all_objects(VisionLabelsDetails, pk)
 
     container = {
-        'photo': photo, 
+        'photo': photo,
         'faces_details': faces_details,
         'lables_details': labels_details,
     }
@@ -30,7 +29,7 @@ def photo_detail(request, pk):
 def photo_delete(request, pk):
     delete_photo = Photo.objects.get(id=pk)
     delete_photo.delete()
-    return render(request, 'photo_delete.html', {'delete_photo': delete_photo})
+    return render(request, 'photo_delete.html')
 
 
 def photo_add(request):
