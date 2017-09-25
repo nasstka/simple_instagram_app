@@ -8,8 +8,14 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from .models import Photo
 
 
-LIKELIHOOD_NAME = ('Unkown', 'Very Unlikely', 'Unlikely',
-                   'Possible', 'Likely', 'Very Likely')
+LIKELIHOOD_NAME = (
+    'Unkown',
+    'Very Unlikely',
+    'Unlikely',
+    'Possible',
+    'Likely',
+    'Very Likely'
+)
 
 
 def photo_vision_service(photo_id):

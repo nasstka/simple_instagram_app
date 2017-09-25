@@ -2,23 +2,23 @@ from django.shortcuts import render, redirect
 
 from .forms import PhotoForm
 from .models import Photo, VisionFaceDetails, VisionLabelsDetails
-from .utils import get_all_objects, save_photo_vision_data
+from .utils import convert_model_objects_to_dicts, save_photo_vision_data
 
 
 def dashboard(request):
     photos = Photo.objects.all().order_by('-id')
+
     return render(request, 'dashboard.html', {'photos': photos})
 
 
 def photo_detail(request, pk):
-    photo = Photo.objects.get(id=pk)
+    photo_instance = Photo.objects.get(id=pk)
 
-    faces_details = get_all_objects(VisionFaceDetails, pk)
-
-    labels_details = get_all_objects(VisionLabelsDetails, pk)
+    faces_details = convert_model_objects_to_dicts(VisionFaceDetails, pk)
+    labels_details = convert_model_objects_to_dicts(VisionLabelsDetails, pk)
 
     container = {
-        'photo': photo,
+        'photo': photo_instance,
         'faces_details': faces_details,
         'lables_details': labels_details,
     }
@@ -27,8 +27,9 @@ def photo_detail(request, pk):
 
 
 def photo_delete(request, pk):
-    delete_photo = Photo.objects.get(id=pk)
-    delete_photo.delete()
+    photo_instance = Photo.objects.get(id=pk)
+    photo_instance.delete()
+
     return render(request, 'photo_delete.html')
 
 

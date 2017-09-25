@@ -1,58 +1,67 @@
-  .page-header {
-  padding-bottom: 4rem;
-  padding-top: 3rem;
-  }
+.page-header {
+    padding-bottom: 4rem;
+    padding-top: 3rem;
+}
 
-  .dashboard {
-      min-height: 495px;
-      padding-bottom: 1rem;
-      padding-top: 1rem;
-  }
+.dashboard {
+    padding-bottom: 4rem;
+    padding-top: 4rem;
+}
 
-  .navbar-brand {
-      font-size: 1.5rem;
-  }
+.navbar-brand {
+    font-size: 1.5rem;
+}
 
-  .jumbotron-heading, .add {
-      font-size: 40px;
-  }
+.jumbotron-heading, .add {
+    font-size: 40px;
+}
 
-  .text-center.header {
-      padding: 3rem;
-      font-size: 40px;
-  }
+.text-center.header {
+    padding: 3rem;
+    font-size: 40px;
+}
 
-  .details {
-      padding-bottom: 0.5rem;
-  }
-  .card-title {
-      font-size: 1.6rem;
-  }
+.details {
+    padding-bottom: 0.5rem;
+}
+.card-title {
+    font-size: 1.6rem;
+}
 
-  .card-text {
-      font-size: 1.2rem;
-  }
+.card-text {
+    font-size: 1.2rem;
+}
 
-  .wrapper, .form {
-      height: 825px;
-  }
+.wrapper, .form {
+    height: 47rem;
+}
+.form {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.delete {
+    padding-top: 18rem;
+}
 
-  .delete {
-      padding-top: 18rem;
-  }
+.btn {
+    font-size: 19px;
+}
 
-  .btn {
-      font-size: 19px;
-  }
+.delete_btn {
+    padding-top: 20px;
+}
 
-  .delete_btn {
-      padding-top: 20px;
-  }
+.form-group.row {
+    padding-bottom: 1.5rem;
+}
 
-  .form-group.row {
-      padding-bottom: 1.5rem;
-  }
-  
-  .no_face {
-      padding: 30px;
-  }
+.no_face {
+    padding: 30px;
+}
+
+.no_image {
+    padding-top: 10rem;
+    padding-bottom: 12rem;
+    font-size: 2rem;
+    color: rgba(26, 23, 23, 0.40)
+}

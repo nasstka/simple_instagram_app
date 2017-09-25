@@ -15,6 +15,7 @@
 <div class="album text-muted dashboard">
   <div class="container">
     <div class="row">
+      {% if photos %}
       {% for photo in photos %}
       <div class="col-md-4">
            <a href="{% url 'photo_detail' pk=photo.id %}"> 
@@ -26,6 +27,11 @@
         <div class="row">
         {% endif %}
       {% endfor %}
+      {% else %}
+      <div class="col-md-12">          
+      <h2 class="text-center no_image">No images were uploaded yet.</h2>
+      </div>
+    {% endif %}
       </div>
   </div>
 </div>
