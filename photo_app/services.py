@@ -3,15 +3,23 @@ import os
 
 from google.cloud import vision
 from PIL import Image, ImageDraw
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 from .models import Photo
 
 
-LIKELIHOOD_NAME = ('UNKNOWN', 'VERY UNLIKELY', 'UNLIKELY',
-                   'POSSIBLE', 'LIKELY', 'VERY LIKELY')
+LIKELIHOOD_NAME = ('Unkown', 'Very Unlikely', 'Unlikely',
+                   'Possible', 'Likely', 'Very Likely')
 
 
 def photo_vision_service(photo_id):
+    """
+    It use the Google Cloud Vision API to detect faces and labels in an image.
+    Label Detection detects broad sets of categories within an image.
+    Face Detection detects multiple faces within an image along with the
+    associated key facial attributes such as emotional state.
+    """
+
     photo = Photo.objects.get(id=photo_id)
 
     client = vision.ImageAnnotatorClient()
@@ -36,7 +44,7 @@ def photo_vision_service(photo_id):
 
     img = Image.open(file_name)
     draw = ImageDraw.Draw(img)
-    
+
     face_list = []
     for face in faces:
         box = [
@@ -64,16 +72,20 @@ def photo_vision_service(photo_id):
             'sorrow': LIKELIHOOD_NAME[face.sorrow_likelihood],
         }
         face_list.append(face_detail)
-        
+
     image_name, extension = os.path.splitext(file_name)
-    new_image_name = ''.join([image_name,'-modified', extension])
+    new_image_name = ''.join([image_name, '-modified', extension])
     img.save(new_image_name)
- 
-    photo.modified_image = new_image_name
+
+    photo.modified_image = SimpleUploadedFile(
+        new_image_name,
+        content=open(new_image_name, 'rb').read(),
+        content_type='image/*'
+    )
     photo.save()
 
     contents = {
-        'labels': label_list, 
+        'labels': label_list,
         'faces': face_list,
     }
 
