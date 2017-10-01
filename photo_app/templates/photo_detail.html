@@ -54,7 +54,9 @@
 
   <div class="tab-pane" id="faces" role="tabpanel">
     <div class="container"> 
-      {% if faces_details %} 
+      {% if faces_details %}
+      <div class="panel panel-default">
+        <div class="panel-body">
       {% for face in faces_details %}
       <table class="table table-striped">       
         <thead class="thead-inverse">
@@ -82,6 +84,8 @@
         </tbody>
       </table>
       {% endfor %}
+    </div>
+      </div>
       {% else %}
         <h4 class="text-center no_face">No faces were found in the image.</h4>
       {% endif %}

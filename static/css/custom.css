@@ -65,3 +65,8 @@
     font-size: 2rem;
     color: rgba(26, 23, 23, 0.40)
 }
+
+.panel-body {
+    height: 255px;
+    overflow-y: scroll;
+}

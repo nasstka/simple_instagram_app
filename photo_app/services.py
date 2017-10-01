@@ -2,7 +2,7 @@ import io
 import os
 
 from google.cloud import vision
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from .models import Photo
@@ -16,6 +16,9 @@ LIKELIHOOD_NAME = (
     'Likely',
     'Very Likely'
 )
+
+FONT_PATH = '/home/nastka/Desktop/Roboto/Roboto-Regular.ttf'
+FONT = ImageFont.truetype(FONT_PATH, 25)
 
 
 def photo_vision_service(photo_id):
@@ -51,18 +54,29 @@ def photo_vision_service(photo_id):
     img = Image.open(file_name)
     draw = ImageDraw.Draw(img)
 
+    count = 0
     face_list = []
     for face in faces:
+        count += 1
         box = [
             (vertex.x, vertex.y)
             for vertex in face.fd_bounding_poly.vertices
         ]
-        draw.line(box + [box[0]], width=3, fill='#ff0000')
+        draw.line(box + [box[0]], width=3, fill='#00ff00')
+
+        text_coordinate_x = box[0][0] - 5
+        text_coordinate_y = box[1][1] - 35
+        draw.text(
+            (text_coordinate_x, text_coordinate_y),
+            ''.join(['#', str(count)]),
+            fill='#00ff00',
+            font=FONT
+        )
 
         for landmark in face.landmarks:
             face_landmarks = (landmark.position.x, landmark.position.y)
-            second_coordinate_x = face_landmarks[0] + 4
-            second_coordinate_y = face_landmarks[1] + 4
+            second_coordinate_x = face_landmarks[0] + 3
+            second_coordinate_y = face_landmarks[1] + 3
             draw.rectangle(
                 (
                     face_landmarks,
