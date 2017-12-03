@@ -5,6 +5,7 @@ from google.cloud import vision
 from PIL import Image, ImageDraw, ImageFont
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from my_instagram import settings
 from .models import Photo
 
 
@@ -17,8 +18,8 @@ LIKELIHOOD_NAME = (
     'Very Likely'
 )
 
-FONT_PATH = '/home/nastka/Desktop/Roboto/Roboto-Regular.ttf'
-FONT = ImageFont.truetype(FONT_PATH, 25)
+FONT_PATH = os.path.join(settings.BASE_DIR, 'fonts', 'Roboto-Medium.ttf')
+FONT = ImageFont.truetype(FONT_PATH, 28)
 
 
 def photo_vision_service(photo_id):
@@ -54,10 +55,8 @@ def photo_vision_service(photo_id):
     img = Image.open(file_name)
     draw = ImageDraw.Draw(img)
 
-    count = 0
     face_list = []
-    for face in faces:
-        count += 1
+    for count, face in enumerate(faces, start=1):
         box = [
             (vertex.x, vertex.y)
             for vertex in face.fd_bounding_poly.vertices
